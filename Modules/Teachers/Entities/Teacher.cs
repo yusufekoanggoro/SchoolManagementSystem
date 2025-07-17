@@ -33,6 +33,10 @@ namespace SchoolManagementSystem.Entities
 
         // Relasi ke Users (optional jika kamu pakai relasi navigasi)
         [ForeignKey("UserId")]
-        public virtual User? User { get; set; }
+        // public virtual User? User { get; set; }
+        public User User { get; set; } = null!;
+
+        // one to many
+        public ICollection<Class> Classes { get; set; } = new List<Class>();
     }
 }

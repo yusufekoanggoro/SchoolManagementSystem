@@ -11,6 +11,8 @@ namespace SchoolManagementSystem.Configuration
         public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,12 +30,25 @@ namespace SchoolManagementSystem.Configuration
                 .HasForeignKey<Student>(s => s.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-        // Relasi User - Teacher
+            // Relasi User - Teacher
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Teacher)
                 .WithOne(t => t.User)
                 .HasForeignKey<Teacher>(t => t.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Relasi Class - Teacher
+            modelBuilder.Entity<Class>()
+                .HasOne(c => c.Teacher)
+                .WithMany(t => t.Classes)
+                .HasForeignKey(c => c.TeacherId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // Cegah duplikat Enrollment
+            modelBuilder.Entity<Enrollment>()
+                .HasIndex(e => new { e.StudentId, e.ClassId })
+                .IsUnique();
         }
     }
 

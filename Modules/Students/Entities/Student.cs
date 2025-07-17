@@ -30,7 +30,12 @@ namespace SchoolManagementSystem.Entities
         public string? Address { get; set; }
 
         // Relasi ke Users (optional jika kamu pakai relasi navigasi)
+        // on to one
         [ForeignKey("UserId")]
-        public virtual User? User { get; set; }
+        // public virtual User? User { get; set; } // lazy loading
+        public User User { get; set; } = null!;
+
+        // one to many
+        public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     }
 }
