@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # sms_service:
+  #   build: ./
+  #   working_dir: /app
+  #   container_name: sms_service
+  #   depends_on:
+  #     - sms_db
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - sms_network
+  #   restart: always
+  #   # volumes:
+  #   #   - .:/app
+
+  sms_db:
+    image: postgres:15
+    container_name: sms_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: sms_db
+    ports:
+      # <host_port>:<container_port>
+      - "5435:5432"
+    networks:
+      - sms_network
+    volumes:
+      - sms_db_data:/var/lib/postgresql/data
+      
+networks:
+  sms_network:
+    driver: bridge
+
+volumes:
+  sms_db_data:
