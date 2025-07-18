@@ -133,7 +133,7 @@ Aplikasi akan berjalan di: [http://localhost:5283](http://localhost:5283)
 ## 🛠️ Setup & Migrasi Database
 
 1. Pastikan service database telah berjalan (otomatis dijalankan oleh Docker Compose).
-2. Jika menggunakan Entity Framework Core (misalnya di .NET):
+2. Lakukan migrasi database dengan langkah berikut:
 
 ```bash
 # Masuk ke dalam container aplikasi
@@ -143,10 +143,11 @@ docker-compose exec sms_service bash
 dotnet ef database update
 ```
 
-> Pastikan konfigurasi `ConnectionStrings` sudah mengarah ke environment variable, misalnya:
-> 
-> ```
-> Host=sms_db;Port=5432;Database=sms_db;Username=postgres;Password=admin
+> Pastikan koneksi database Anda diatur melalui environment variable yang dibaca otomatis oleh aplikasi atau melalui konfigurasi `appsettings.json` jika diperlukan.
+>
+> Contoh isi `.env`:
+> ```env
+> DEFAULT_CONNECTION=Host=sms_db;Port=5432;Database=sms_db;Username=postgres;Password=admin
 > ```
 
 ---
@@ -162,4 +163,4 @@ dotnet ef database update
 
 ## 📬 Kontak
 
-Jika Anda memiliki pertanyaan atau masukan, silakan hubungi kami melalui [email atau tautan kontak Anda di sini].
+Jika Anda memiliki pertanyaan atau masukan, silakan hubungi saya.
