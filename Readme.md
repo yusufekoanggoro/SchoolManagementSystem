@@ -9,8 +9,8 @@ Pastikan Anda telah menginstal **Docker** dan **Docker Compose** di mesin Anda.
 ### 1. Clone repositori ini
 
 ```bash
-git clone https://github.com/nama-user/nama-repo.git
-cd nama-repo
+git clone https://github.com/yusufekoanggoro/SchoolManagementSystem
+cd SchoolManagementSystem
 ```
 
 ### 2. Jalankan dengan Docker Compose
