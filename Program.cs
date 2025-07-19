@@ -10,7 +10,18 @@ using SchoolManagementSystem.Teachers.Repositories;
 using SchoolManagementSystem.Users.Repositories;
 using SchoolManagementSystem.Students.Services.Interfaces;
 using SchoolManagementSystem.Teachers.Services.Interfaces;
-using DotNetEnv;
+using SchoolManagementSystem.Classes.Repositories.Interfaces;
+using SchoolManagementSystem.Classes.Repositories;
+using SchoolManagementSystem.Enrollments.Repositories.Interfaces;
+using SchoolManagementSystem.Enrollments.Repositories;
+using SchoolManagementSystem.Classes.Services.Interfaces;
+using SchoolManagementSystem.Classes.Services;
+using SchoolManagementSystem.Enrollments.Services.Interfaces;
+using SchoolManagementSystem.Enrollments.Services;
+using SchoolManagementSystem.Middlewares;
+using Microsoft.AspNetCore.Authentication;
+using SchoolManagementSystem.Auths.Services;
+using SchoolManagementSystem.Auths.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,21 +38,33 @@ builder.Configuration["ConnectionStrings:DefaultConnection"] = Environment.GetEn
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// add BasicAuthentication
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthentication>("BasicAuthentication", null);
+builder.Services.AddAuthorization();
+
 builder.Services.AddControllers();
 
 // add repositories
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IClassRepository, ClassRepository>();
+builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 
 // add services
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
+builder.Services.AddScoped<IClassService, ClassService>();
+builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // add automapper
 builder.Services.AddAutoMapper(
     typeof(StudentMappingProfile),
-    typeof(TeacherMappingProfile)
+    typeof(TeacherMappingProfile),
+    typeof(ClassMappingProfile),
+    typeof(EnrollmentMappingProfile)
 );
 
 var app = builder.Build();

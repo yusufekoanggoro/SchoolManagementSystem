@@ -8,7 +8,7 @@ services:
   #   depends_on:
   #     - sms_db
   #   ports:
-  #     - "8080:8080"
+  #     - "5283:8080"
   #   networks:
   #     - sms_network
   #   restart: always

@@ -49,6 +49,10 @@ namespace SchoolManagementSystem.Configuration
             modelBuilder.Entity<Enrollment>()
                 .HasIndex(e => new { e.StudentId, e.ClassId })
                 .IsUnique();
+
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, FullName = "admin", PasswordHash = "admin", Role = "admin", CreatedAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc), }
+            );
         }
     }
 
