@@ -62,12 +62,12 @@ public class StudentRepository : IStudentRepository
                 .Take(take)
                 .ToListAsync();
 
-        }
+    }
 
-        public async Task<Student?> FindByIdAsync(int id)
-        {
-            return await _context.Students.FindAsync(id);
-        }
+    public async Task<Student?> FindByIdAsync(int id)
+    {
+        return await _context.Students.FindAsync(id);
+    }
 
         public async Task UpdateStudentAsync(Student student)
         {
