@@ -12,6 +12,7 @@ namespace SchoolManagementSystem.Entities
         [Column("id")]
         public int Id { get; set; }
 
+        [ForeignKey("User")]
         [Required]
         [Column("user_id")]
         public int UserId { get; set; }
@@ -32,7 +33,6 @@ namespace SchoolManagementSystem.Entities
         public string? Address { get; set; }
 
         // Relasi ke Users (optional jika kamu pakai relasi navigasi)
-        [ForeignKey("UserId")]
         // public virtual User? User { get; set; }
         public User User { get; set; } = null!;
 

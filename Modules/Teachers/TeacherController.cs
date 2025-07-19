@@ -67,7 +67,7 @@ namespace SchoolManagementSystem.Controllers
                     Pagination = pagination
                 }
             };
-                
+
             return Ok(response);
         }
 
