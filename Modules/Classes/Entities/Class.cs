@@ -12,12 +12,16 @@ namespace SchoolManagementSystem.Entities
 
         [Required]
         [MaxLength(100)]
+        [Column("name")]
         public string Name { get; set; } = string.Empty;
 
         [ForeignKey("Teacher")]
+        [Column("teacher_id")]
         public int? TeacherId { get; set; }
+
         public Teacher? Teacher { get; set; }
-        
+
         public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     }
 }
+
