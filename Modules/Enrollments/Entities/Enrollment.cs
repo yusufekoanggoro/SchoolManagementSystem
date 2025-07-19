@@ -11,10 +11,12 @@ namespace SchoolManagementSystem.Entities
         public int Id { get; set; }
 
         [ForeignKey("Student")]
+        [Column("student_id")]
         public int StudentId { get; set; }
         public Student Student { get; set; } = null!;
 
         [ForeignKey("Class")]
+        [Column("class_id")]
         public int ClassId { get; set; }
         public Class Class { get; set; } = null!;
     }
