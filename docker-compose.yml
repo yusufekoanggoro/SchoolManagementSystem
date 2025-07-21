@@ -1,19 +1,19 @@
 version: '3.8'
 
 services:
-  # sms_service:
-  #   build: ./
-  #   working_dir: /app
-  #   container_name: sms_service
-  #   depends_on:
-  #     - sms_db
-  #   ports:
-  #     - "5283:8080"
-  #   networks:
-  #     - sms_network
-  #   restart: always
-  #   # volumes:
-  #   #   - .:/app
+  sms_service:
+    build: ./
+    working_dir: /app
+    container_name: sms_service
+    depends_on:
+      - sms_db
+    ports:
+      - "5283:8080"
+    networks:
+      - sms_network
+    restart: always
+    # volumes:
+    #   - .:/app
 
   sms_db:
     image: postgres:15
